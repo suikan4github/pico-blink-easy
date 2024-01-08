@@ -52,7 +52,41 @@ add_executable(blink
         )
 
 # pull in common dependencies
-target_link_libraries(blink pico_stdlib)
+# Regarding the independe peripheral libraries, see : 
+# - Understanding the C/C++ SDK architecture for the Raspberry Pi Pico
+#   ( https://vanhunteradams.com/Pico/Setup/SDKArchitecture.html#Hardware-support-libraries )
+# and : 
+# - The section 4.1 of the Raspberry Pi Pico C/C++ SDK
+#   ( https://vanhunteradams.com/Pico/Setup/PicoCSDK.pdf )
+# Each hardware_FOO library needs the :
+# #include <hardware/FOO.h>
+# in the source code. 
+target_link_libraries(blink pico_stdlib
+# Un-comment the desired line to use the peripheral library.
+
+# hardware_adc      # Analog to Digital Converter (ADC) API.
+# hardware_claim    # Lightweight hardware resource management.
+# hardware_clocks   # Clock Management API.
+# hardware_divider  # Low-level hardware-divider access.
+# hardware_dma      # DMA  Controller API.
+# hardware_flash    # Low level flash programming and erase API.
+# hardware_gpio     # General Purpose Input/Output (GPIO) API.
+# hardware_i2c      # I2C Controller API.
+# hardware_interp   # Hardware Interpolator API.
+# hardware_irq      # Hardware interrupt handling.
+# hardware_pio      # Programmable I/O (PIO) API.
+# hardware_pll      # Phase Locked Loop control APIs.
+# hardware_pwm      # Hardware Pulse Width Modulation (PWM) API.
+# hardware_resets   # Hardware Reset API.
+# hardware_rtc      # Hardware Real Time Clock API.
+# hardware_spi      # Hardware SPI API.
+# hardware_sync     # Low level hardware spin-lock, barrier and processor event API.
+# hardware_timer    # Low-level hardware timer API.
+# hardware_uart     # Hardware UART API.
+# hardware_vreg     # Voltage Regulation API.
+# hardware_watchdog # Hardware Watchdog Timer API.
+# hardware_xosc     # Crystal Oscillator (XOSC) API.
+)
 
 # create map/bin/hex file etc.
 pico_add_extra_outputs(blink)
